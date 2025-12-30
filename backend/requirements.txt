@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-multipart
+pypdf
+python-docx
+scikit-learn
+numpy
+openai
+google-generativeai
+python-dotenv
+nltk
+spacy
