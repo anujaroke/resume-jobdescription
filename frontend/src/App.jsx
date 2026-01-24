@@ -53,7 +53,7 @@ function App() {
       </main>
 
       <footer className={`mt-16 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'} text-sm`}>
-        <p>Powered by AI • Built with React & FastAPI</p>
+        <p>Powered by AI • Built with React & FastAPI • Developed by Anuj</p>
       </footer>
       </div>
     </div>

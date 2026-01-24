@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useTheme } from '../context/ThemeContext';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 const UploadForm = ({ onAnalysisComplete }) => {
     const { isDark } = useTheme();
     const [file, setFile] = useState(null);
@@ -13,10 +15,6 @@ const UploadForm = ({ onAnalysisComplete }) => {
     const [error, setError] = useState("");
 
     const recommendedLength = 1200;
-    const sampleJd = `We are seeking a Frontend Engineer to build delightful, performant user experiences.
-Responsibilities include implementing accessible UI, collaborating with designers, and improving performance.
-Must have 3+ years with React, TypeScript, testing (Jest/RTL), and CSS (Tailwind or CSS-in-JS).
-Nice to have: experience with design systems, a11y, analytics instrumentation, and backend APIs.`;
 
     const formatBytes = (bytes) => {
         if (!bytes) return "";
@@ -66,7 +64,7 @@ Nice to have: experience with design systems, a11y, analytics instrumentation, a
         formData.append("job_description", jd);
 
         try {
-            const response = await axios.post("http://localhost:8000/api/analyze", formData, {
+            const response = await axios.post(`${API_BASE}/api/analyze`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -169,22 +167,9 @@ Nice to have: experience with design systems, a11y, analytics instrumentation, a
                     <div className="space-y-3">
                         <div className="flex items-center justify-between gap-3 flex-wrap">
                             <label className={`block text-sm font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>💼 Job Description</label>
-                            <div className="flex gap-2">
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setJd(sampleJd);
-                                        setJdCharCount(sampleJd.length);
-                                        setError("");
-                                    }}
-                                    className={`text-xs font-semibold rounded-lg px-3 py-2 transition-colors ${isDark ? 'text-blue-400 bg-slate-700 border border-slate-600 hover:bg-slate-600' : 'text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100'}`}
-                                >
-                                    Use sample JD
-                                </button>
-                                {jd && (
-                                    <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{jd.split(/\s+/).filter(Boolean).length} words</span>
-                                )}
-                            </div>
+                            {jd && (
+                                <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{jd.split(/\s+/).filter(Boolean).length} words</span>
+                            )}
                         </div>
 
                         <textarea
