@@ -38,7 +38,7 @@ function App() {
           Match your resume to <span className={`underline decoration-2 decoration-emerald-500/60 underline-offset-4`}>any job</span>
         </h1>
         <p className={`text-base leading-relaxed ${isDark ? 'text-zinc-400' : 'text-stone-600'}`}>
-          Upload your resume and paste a job description. Get a match score, missing keywords, and a tailored cover letter-no fluff, just results.
+          Upload your resume and paste a job description. Get a match score, missing keywords, and a tailored cover letter - no fluff, just results.
         </p>
         
         {!analysisData && (
