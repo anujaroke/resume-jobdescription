@@ -9,42 +9,59 @@ function App() {
 
   return (
     <div className={`min-h-screen ${isDark ? 'dark' : ''}`}>
-      <div className={`min-h-screen bg-gradient-to-br ${isDark ? 'from-slate-900 via-slate-800 to-slate-900' : 'from-blue-50 via-white to-indigo-50'} py-8 px-4 transition-colors duration-300`}>
-      <header className="mb-12 relative">
-        <button
-          onClick={toggleTheme}
-          className={`absolute right-0 top-0 p-2.5 rounded-xl shadow-lg transition-all transform hover:scale-110 ${isDark ? 'bg-gradient-to-br from-yellow-300 to-orange-400 text-gray-900 hover:from-yellow-200 hover:to-orange-300' : 'bg-gradient-to-br from-slate-700 to-slate-800 text-blue-300 hover:from-slate-600 hover:to-slate-700'}`}
-          title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {isDark ? (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              <circle cx="12" cy="12" r="5" fill="currentColor" opacity="0.3"/>
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-          )}
-        </button>
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <div className={`min-h-screen ${isDark ? 'bg-zinc-950' : 'bg-stone-50'} py-10 px-5 transition-colors`}>
+
+      <header className="mb-14 max-w-2xl mx-auto">
+        <div className="flex items-center justify-between mb-10">
+          <span className={`text-xs font-medium tracking-widest uppercase ${isDark ? 'text-zinc-500' : 'text-stone-400'}`}>
+            Resume Matcher
+          </span>
+          <button
+            onClick={toggleTheme}
+            className={`p-2 rounded-md border transition-all duration-200 ${isDark ? 'border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 hover:bg-zinc-800/50' : 'border-stone-300 text-stone-500 hover:text-stone-700 hover:border-stone-400 hover:bg-stone-100'}`}
+            title={isDark ? 'Light mode' : 'Dark mode'}
+          >
+            {isDark ? (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
               </svg>
-            </div>
-            <h1 className={`text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent`}>
-              AI Resume Matcher
-            </h1>
-          </div>
+            ) : (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+              </svg>
+            )}
+          </button>
         </div>
-        <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-lg max-w-2xl mx-auto text-center`}>
-          Optimize your resume with AI-powered analysis and get personalized recommendations
+        
+        <h1 className={`text-3xl md:text-4xl font-semibold tracking-tight mb-4 ${isDark ? 'text-zinc-100' : 'text-stone-900'}`}>
+          Match your resume to <span className={`underline decoration-2 decoration-emerald-500/60 underline-offset-4`}>any job</span>
+        </h1>
+        <p className={`text-base leading-relaxed ${isDark ? 'text-zinc-400' : 'text-stone-600'}`}>
+          Upload your resume and paste a job description. Get a match score, missing keywords, and a tailored cover letter-no fluff, just results.
         </p>
+        
+        {!analysisData && (
+          <div className={`mt-8 flex items-center gap-6 text-xs ${isDark ? 'text-zinc-500' : 'text-stone-400'}`}>
+            <div className="flex items-center gap-2">
+              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium ${isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-stone-200 text-stone-500'}`}>1</span>
+              <span>Upload</span>
+            </div>
+            <div className={`w-8 h-px ${isDark ? 'bg-zinc-800' : 'bg-stone-200'}`}></div>
+            <div className="flex items-center gap-2">
+              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium ${isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-stone-200 text-stone-500'}`}>2</span>
+              <span>Paste JD</span>
+            </div>
+            <div className={`w-8 h-px ${isDark ? 'bg-zinc-800' : 'bg-stone-200'}`}></div>
+            <div className="flex items-center gap-2">
+              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium ${isDark ? 'bg-zinc-800 text-zinc-400' : 'bg-stone-200 text-stone-500'}`}>3</span>
+              <span>Get results</span>
+            </div>
+          </div>
+        )}
       </header>
 
-      <main className="max-w-7xl mx-auto">
+      <main className="max-w-2xl mx-auto">
         {!analysisData ? (
           <UploadForm onAnalysisComplete={setAnalysisData} />
         ) : (
@@ -52,8 +69,8 @@ function App() {
         )}
       </main>
 
-      <footer className={`mt-16 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'} text-sm`}>
-        <p>Powered by AI • Built with React & FastAPI • Developed by Anuj</p>
+      <footer className={`mt-20 text-center text-xs ${isDark ? 'text-zinc-600' : 'text-stone-400'}`}>
+        <p>Built with React & FastAPI · Developed by Anuj</p>
       </footer>
       </div>
     </div>
